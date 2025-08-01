@@ -165,6 +165,13 @@ Despite being in /etc/cron.daily/, it also exists in:
 
 </pre>
 
+📌 References
+CVE-2014-0476 - chkrootkit vulnerability
+
+Payload generation - Metasploit Wiki
+
+WebDAV PUT Exploits
+
 
 
 

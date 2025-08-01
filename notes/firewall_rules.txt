@@ -1,0 +1,23 @@
+# Extracted from /root/newRule (after root access)
+
+iptables rules (summary):
+
+INPUT: DROP
+OUTPUT: DROP
+
+ACCEPTED INPUT:
+- TCP dport 22
+- TCP dport 80
+- TCP sport 443
+- TCP sport 8080
+
+ACCEPTED OUTPUT:
+- TCP sport 22
+- TCP sport 80
+- TCP dport 443
+- TCP dport 8080
+
+→ Only outbound connections to ports 443 and 8080 allowed.
+→ Inbound limited to standard services.
+
+# Used this info to regenerate reverse shell on port 443

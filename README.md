@@ -1,5 +1,4 @@
-# SickOs-1.2
-SickOs 1.2 - VulnHub Walkthrough
+# 🔓 Pen-testing SickOS 1.2 (Root Flag Capture)
 
 **This is a walkthrough of the SickOs 1.2 machine from VulnHub. It’s the sequel to SickOs 1.1, and it's both more challenging and more realistic, simulating situations one might encounter during a real-world penetration test**.
 

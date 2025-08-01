@@ -3,6 +3,28 @@ SickOs 1.2 - VulnHub Walkthrough
 
 **This is a walkthrough of the SickOs 1.2 machine from VulnHub. It’s the sequel to SickOs 1.1, and it's both more challenging and more realistic, simulating situations one might encounter during a real-world penetration test**.
 
+**✅ Final Directory Structure**
+<pre>
+  sickos-1.2/
+├── README.md
+├── sickos.md                  # Machine info file
+├── exploit_breakdown.md
+├── notes/
+│   ├── nmap.txt
+│   ├── enumeration.txt
+│   ├── firewall_rules.txt
+│   └── cronchk.txt
+├── payloads/
+│   ├── shell.php
+│   ├── reverse_shell.php
+│   └── meterpreter_command.txt
+└── scripts/
+    ├── execute.sh
+    └── reverse_shell.sh
+
+</pre>
+
+
 **🔍 Discovery**
 
 After downloading and running the machine, we see that it was assigned the IP 192.168.2.4. A port scan using nmap reveals ports 80 (HTTP) and 22 (SSH) open.
@@ -169,6 +191,7 @@ Despite being in /etc/cron.daily/, it also exists in:
 | Flag            | `/root/7d03aaa2bf93d80040f3f22ec6ad9d5a.txt` |
 
 </pre>
+
 
 **📌 References**
 

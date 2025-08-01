@@ -150,8 +150,9 @@ Despite being in /etc/cron.daily/, it also exists in:
 /etc/cron.d/chkrootkit  
 </pre>
 
-<pre>
 **Summary**
+<pre>
+
 | Phase           | Technique Used                               |
 | --------------- | -------------------------------------------- |
 | Enumeration     | Nmap, Dirb, WebDAV detection                 |

